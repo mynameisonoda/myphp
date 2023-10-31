@@ -1,4 +1,5 @@
 <?php 
+require('functions.php');
 $myTitle = (string) 'My blog';
 $numPosts = 0;
 $numPostsDisplay= "$numPosts posts";
@@ -55,6 +56,7 @@ switch ($numPosts){
 }
 ?> -->
 
+<!-- Match Statement -->
 <?php
 echo $numPosts;
 $message = match ($numPosts){
@@ -64,3 +66,35 @@ $message = match ($numPosts){
 }
 ?>
 <h1><?= $message ?></h1>
+
+<!-- Arrays and Loops -->
+<?php 
+$tags = [1999, 2000, 2001];
+foreach ($tags as $key => $tag){
+echo "$key: $tag ";
+}
+?>
+
+<!-- MY BLOG -->
+<?php
+$title = 'My Blog';
+// Calling a function
+$post = getPosts();
+// Count method
+$numPosts = count($post);
+// Ternary Operator
+$postText = $numPosts === 1 ? 'post' : 'posts';
+$numPostsDisplay = "\"$numPosts\" $postText";
+?>
+<h1><?= $title ?></h1>
+<h2><?= $numPostsDisplay ?></h2>
+
+<!-- For loop -->
+<?php for ($i = 0; $i < $numPosts; $i++): ?>
+    <?php if (str_contains($post[$i]['title'], 'SQL')):
+        continue;
+        endif
+        ?>
+    <h3><?= $post[$i]['title'] ?></h3>
+    <h3><?= $post[$i]['author'] ?></h3>
+<?php endfor ?>
